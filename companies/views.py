@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Company
 from .forms import CompanyForm
+from django.contrib.auth.decorators import login_required
 
 def companies(request):
     companies = Company.objects.all()
@@ -12,7 +13,7 @@ def company(request, pk):
     companyObj = Company.objects.get(id = pk)
     return render(request,'companies/single-company.html', {'company': companyObj})
 
-
+@login_required(login_url= "login")
 def createCompany(request):
     form = CompanyForm()
     if request.method == 'POST':
@@ -24,6 +25,7 @@ def createCompany(request):
     context = {'form': form}
     return render(request, "companies/company_form.html", context)
 
+@login_required(login_url= "login")
 def updateCompany(request, pk):
     company = Company.objects.get(id=pk)
     form = CompanyForm(instance= company)
@@ -35,7 +37,8 @@ def updateCompany(request, pk):
             
     context = {'form': form}
     return render(request, "companies/company_form.html", context)
-
+    
+@login_required(login_url= "login")
 def deleteCompany(request, pk):
     company = Company.objects.get(id=pk)
     context = {'object': company}
