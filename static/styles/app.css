@@ -42,7 +42,7 @@ img {
 }
 
 .header__logo > img {
-  height: 18rem;
+  width: 200px;
 }
 
 .header__nav > ul {
@@ -642,7 +642,6 @@ img {
   width: 100%;
   position: relative;
   background: transparent;
-  height: 99vh;
   display: flex;
   justify-content: center;
   align-items: center;
